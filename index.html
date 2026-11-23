@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>THC NYE 26–27 · Complete Design Review (42 Drafts)</title>
+<meta name="description" content="Review and vote on all 42 apparel design drafts (Series J to A) for The Hague Crew NYE 26–27 at Club Paradise Bay, Lake Iskar.">
+<style>
+  :root {
+    --bg: #0c0e0f;
+    --panel: #15181a;
+    --panel-2: #1c2023;
+    --border: rgba(255,255,255,0.09);
+    --border-strong: rgba(255,255,255,0.2);
+    --text: #efece4;
+    --muted: #989a95;
+    --accent: #E06D3E;
+    --accent-soft: rgba(224, 109, 62, 0.16);
+    --green: #4fa876;
+    --radius: 16px;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; overflow-x: clip; }
+  body {
+    margin: 0;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: clip;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.45;
+    padding-bottom: 108px;
+  }
+
+  /* Sticky Top Header */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(12, 14, 15, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .head-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 14px 20px 10px;
+  }
+  .head-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .brand-mark { width: 34px; height: 34px; flex-shrink: 0; }
+  .brand-mark svg { width: 100%; height: 100%; display: block; }
+  .brand h1 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .brand p {
+    margin: 2px 0 0;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .head-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn {
+    appearance: none;
+    border: 1px solid var(--border);
+    background: var(--panel-2);
+    color: var(--text);
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+  }
+  .btn:hover { border-color: var(--border-strong); background: #262b2f; }
+  .btn-accent {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .btn-accent:hover { background: #eb7c4e; border-color: #eb7c4e; }
+
+  /* Filter Pills */
+  .tabs-wrap {
+    display: flex;
+    gap: 7px;
+    overflow-x: auto;
+    padding: 12px 0 4px;
+    scrollbar-width: none;
+  }
+  .tabs-wrap::-webkit-scrollbar { display: none; }
+  .tab {
+    appearance: none;
+    background: var(--panel);
+    color: #c8c7c1;
+    border: 1px solid var(--border);
+    padding: 6px 13px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .tab:hover { border-color: var(--border-strong); color: var(--text); }
+  .tab.active {
+    background: var(--text);
+    color: #111314;
+    border-color: var(--text);
+  }
+  .tab.shortlist-tab.has-picks {
+    border-color: rgba(224,109,62,0.6);
+    color: #ffb18f;
+  }
+  .tab.shortlist-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .dot-new {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: inline-block;
+  }
+
+  /* Shared Friend Banner (when opening ?picks= link) */
+  .shared-banner {
+    max-width: 1440px;
+    margin: 16px auto 0;
+    padding: 0 20px;
+    display: none;
+  }
+  .shared-banner.show { display: block; }
+  .shared-banner-box {
+    background: linear-gradient(135deg, rgba(224,109,62,0.18), rgba(224,109,62,0.06));
+    border: 1px solid rgba(224,109,62,0.45);
+    border-radius: 14px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 13px;
+  }
+
+  /* Intro Banner */
+  main {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 20px 20px 30px;
+  }
+  .tip-strip {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 13px 16px;
+    margin-bottom: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: #cfcdc6;
+  }
+  .tip-strip strong { color: var(--text); }
+  .tip-swatches {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11.5px;
+    color: var(--muted);
+  }
+  .sw {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .sw i {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.35);
+    display: inline-block;
+  }
+
+  /* Series Sections */
+  .series-block { margin-bottom: 42px; }
+  .series-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .series-title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .series-head h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: #ff9c73;
+    border: 1px solid rgba(224,109,62,0.4);
+  }
+  .series-desc {
+    margin: 5px 0 0;
+    font-size: 13px;
+    color: var(--muted);
+    max-width: 820px;
+  }
+  .series-count {
+    font-size: 11.5px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* Cards Grid */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+  @media (max-width: 1120px) { .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 680px) {
+    .cards-grid { grid-template-columns: minmax(0, 1fr); }
+    .head-inner { padding: 12px 14px 8px; }
+    main { padding: 14px 14px 24px; }
+  }
+
+  .card {
+    min-width: 0;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+  }
+  .card:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+  }
+  .card.is-fav {
+    border-color: rgba(224,109,62,0.75);
+    box-shadow: 0 0 0 1px rgba(224,109,62,0.35), 0 12px 28px rgba(224,109,62,0.12);
+  }
+  .card.is-like {
+    border-color: rgba(79,168,118,0.6);
+  }
+
+  .thumb-btn {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: #0a0c0d;
+    cursor: zoom-in;
+    aspect-ratio: 1600 / 960;
+    overflow: hidden;
+  }
+  .thumb-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.25s ease;
+  }
+  .card:hover .thumb-btn img { transform: scale(1.018); }
+  .code-tag {
+    display: inline-block;
+    background: var(--accent-soft);
+    color: #ff9c73;
+    border: 1px solid rgba(224,109,62,0.4);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-right: 7px;
+    vertical-align: middle;
+  }
+  .zoom-hint {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: rgba(12,14,15,0.82);
+    color: #dfddd6;
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.16);
+    opacity: 0.9;
+  }
+
+  .card-body {
+    padding: 13px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    justify-content: space-between;
+  }
+  .card-title {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .card-sub {
+    margin: 3px 0 0;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .vote-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .vote-btns {
+    display: flex;
+    gap: 6px;
+  }
+  .vbtn {
+    appearance: none;
+    background: var(--panel-2);
+    color: #cfcdc6;
+    border: 1px solid var(--border);
+    padding: 6px 11px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.14s ease;
+  }
+  .vbtn:hover { border-color: var(--border-strong); color: #fff; }
+  .vbtn.fav-active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .vbtn.like-active {
+    background: rgba(79,168,118,0.2);
+    border-color: var(--green);
+    color: #8ee5b3;
+  }
+  .vbtn.note-has {
+    border-color: rgba(255,255,255,0.34);
+    color: #fff;
+  }
+
+  /* Color pref dots */
+  .col-picks {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .cp-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.28);
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .cp-dot:hover { transform: scale(1.14); }
+  .cp-dot.active {
+    border-color: #fff;
+    box-shadow: 0 0 0 2px var(--accent);
+    transform: scale(1.12);
+  }
+
+  .note-box-inline {
+    display: none;
+    margin-top: 2px;
+  }
+  .note-box-inline.open { display: block; }
+  .note-input {
+    width: 100%;
+    background: #0f1214;
+    border: 1px solid var(--border-strong);
+    border-radius: 9px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 12.5px;
+    padding: 7px 10px;
+    outline: none;
+  }
+  .note-input:focus { border-color: var(--accent); }
+
+  /* Floating Bottom Bar */
+  .dock {
+    position: fixed;
+    left: 50%;
+    bottom: max(14px, env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    z-index: 45;
+    background: rgba(21, 24, 26, 0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 999px;
+    padding: 8px 10px 8px 18px;
+    box-shadow: 0 14px 40px rgba(0,0,0,0.55);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    max-width: calc(100vw - 24px);
+  }
+  .dock-stats {
+    font-size: 12.5px;
+    color: #d6d4cd;
+    white-space: nowrap;
+  }
+  .dock-stats strong { color: #fff; }
+
+  /* Lightbox */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    background: rgba(7, 8, 9, 0.96);
+    display: none;
+    flex-direction: column;
+  }
+  .lightbox.open { display: flex; }
+  .lb-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--border);
+    gap: 12px;
+  }
+  .lb-meta { min-width: 0; }
+  .lb-kicker { font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  .lb-title { font-size: 16px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .lb-stage {
+    flex: 1;
+    min-height: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 58px;
+    overflow: auto;
+  }
+  @media (max-width: 680px) { .lb-stage { padding: 10px 10px; } }
+  .lb-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.65);
+    cursor: zoom-in;
+    transition: transform 0.2s ease;
+  }
+  .lb-img.zoomed {
+    max-width: none;
+    max-height: none;
+    width: min(1600px, 210vw);
+    cursor: zoom-out;
+  }
+  .lb-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(21,24,26,0.86);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lb-nav:hover { background: var(--accent); border-color: var(--accent); }
+  .lb-prev { left: 12px; }
+  .lb-next { right: 12px; }
+  .lb-bar {
+    border-top: 1px solid var(--border);
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    background: #111315;
+  }
+  .lb-note {
+    flex: 1;
+    min-width: 190px;
+    max-width: 420px;
+  }
+
+  /* Summary Modal */
+  .modal-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+  .modal-bg.open { display: flex; }
+  .modal {
+    width: 100%;
+    max-width: 560px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: var(--panel);
+    border: 1px solid var(--border-strong);
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.65);
+  }
+  .modal h3 { margin: 0 0 6px; font-size: 19px; }
+  .modal p.m-sub { margin: 0 0 14px; font-size: 13px; color: var(--muted); }
+  .m-label { display: block; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin: 12px 0 6px; }
+  .summary-box {
+    width: 100%;
+    min-height: 185px;
+    background: #0c0e0f;
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+    border-radius: 10px;
+    padding: 12px;
+    font-family: Consolas, ui-monospace, monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    resize: vertical;
+  }
+  .modal-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .empty-state {
+    text-align: center;
+    padding: 64px 20px;
+    color: var(--muted);
+    background: var(--panel);
+    border: 1px dashed var(--border-strong);
+    border-radius: 16px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-inner">
+    <div class="head-top">
+      <div class="brand">
+        <div class="brand-mark"><svg viewBox="162 292 236 232" xmlns="http://www.w3.org/2000/svg"><path fill="#EFECE4" id="logo" d="M167.67,378.09c6.72-2.44,13.13-4.76,19.86-7.2c0,0.97,0,1.68,0,2.39c0,38.49,0.01,76.98-0.04,115.47
+	c0,1.57,0.43,2.43,1.81,3.23c8.69,5,17.33,10.11,25.98,15.17c0.41,0.24,0.87,0.4,1.53,0.7c0-0.95,0-1.68,0-2.41
+	c0-47.8,0.01-95.6-0.04-143.4c0-1.52,0.45-2.16,1.84-2.65c19.04-6.74,38.07-13.53,57.1-20.31c0.45-0.16,0.92-0.27,1.53-0.45
+	c0,28.69,0,57.2,0,85.63c-4.7,0-9.29,0-14.05,0c0-20.31,0-40.34,0-60.73c-2.13,0.5-4.03,0.9-5.91,1.38
+	c-8.67,2.22-17.33,4.49-26.01,6.65c-1.62,0.4-1.57,1.38-1.57,2.6c0.01,36.43,0.01,72.86,0.01,109.29c0,10,0.02,20-0.02,29.99
+	c0,1.18,0.31,1.91,1.4,2.54c10.14,5.97,20.25,12.01,30.37,18.03c0.45,0.27,0.94,0.48,1.69,0.85c0-30.2,0-60.09,0-90.22
+	c2.59,0.3,4.98,0.56,7.36,0.84c1.85,0.22,3.72,0.39,5.55,0.76c0.5,0.1,1.06,0.8,1.25,1.35c0.22,0.61,0.05,1.36,0.05,2.04
+	c0,30.37,0,60.74,0,91.1c0,0.66,0,1.33,0,2.33c4.02-2.38,7.76-4.58,11.49-6.79c20.8-12.32,41.6-24.64,62.4-36.96
+	c11.69-6.92,23.38-13.84,35.04-20.8c0.55-0.33,1.23-1.05,1.24-1.59c0.08-8.3,0.05-16.61,0.05-25.39
+	c-24.16,8.41-48.09,16.73-72.18,25.11c0-41.6,0-82.99,0-124.58c23.99,8.65,47.94,17.28,72.04,25.97c0.06-0.46,0.14-0.74,0.14-1.02
+	c0.01-7.5-0.02-15,0.04-22.49c0.01-1.14-0.49-1.63-1.37-2.14c-30.04-17.62-60.07-35.26-90.1-52.9c-5.69-3.34-11.4-6.68-17.06-10.08
+	c-1.04-0.63-1.8-0.64-2.87-0.02c-19.94,11.56-39.91,23.07-59.87,34.59c-15.75,9.1-31.51,18.19-47.23,27.33
+	c-0.63,0.37-1.38,1.23-1.39,1.86C167.64,361.36,167.67,369.54,167.67,378.09z"/><path fill="#E06D3E" id="sqaure" d="M333.2,449c18.2-3.31,36.21-6.59,54.11-9.84c0-4.47,0.02-8.77,0-13.06c-0.07-10.99-0.19-21.98-0.21-32.97
+	c0-1.43-0.52-1.84-1.84-2.18c-17.13-4.38-34.24-8.85-51.36-13.29c-0.17-0.04-0.36-0.01-0.7-0.01
+	C333.2,401.31,333.2,424.93,333.2,449z"/></svg></div>
+        <div>
+          <h1>THC · NYE 26–27 Design Review</h1>
+          <p>42 Apparel Drafts (Series J → A) · Club Paradise Bay, Lake Iskar</p>
+        </div>
+      </div>
+      <div class="head-actions">
+        <button class="btn" id="btn-shortlist-top" onclick="setTab('SHORTLIST')">★ Shortlist (<span id="top-count">0</span>)</button>
+        <button class="btn btn-accent" onclick="openShareModal()">Share My Picks</button>
+      </div>
+    </div>
+    <div class="tabs-wrap" id="tabs-bar"></div>
+  </div>
+</header>
+
+<div class="shared-banner" id="shared-banner">
+  <div class="shared-banner-box">
+    <div id="shared-banner-text">Viewing shared picks.</div>
+    <button class="btn" onclick="clearSharedLink()">Start My Own Votes</button>
+  </div>
+</div>
+
+<main>
+  <div class="tip-strip">
+    <div><strong>How to review:</strong> Tap any board to zoom fullscreen (swipe or use <code>←</code> <code>→</code>). Mark your <strong>❤️ Top Picks</strong> &amp; <strong>👍 Likes</strong>, pick a hoodie color if you have a favorite, then tap <strong>Share My Picks</strong> to paste back in chat.</div>
+    <div class="tip-swatches">
+      <span>UNIQLO : C Colors:</span>
+      <span class="sw"><i style="background:#2E362F"></i>59 Green</span>
+      <span class="sw"><i style="background:#DCD6CA"></i>31 Beige</span>
+      <span class="sw"><i style="background:#151618"></i>09 Black</span>
+    </div>
+  </div>
+
+  <div id="gallery-root"></div>
+</main>
+
+<div class="dock">
+  <div class="dock-stats" id="dock-stats"><strong>0</strong> Top Picks · <strong>0</strong> Likes</div>
+  <button class="btn btn-accent" onclick="openShareModal()">Share Picks</button>
+</div>
+
+<!-- Fullscreen Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <div class="lb-top">
+    <div class="lb-meta">
+      <div class="lb-kicker" id="lb-kicker"></div>
+      <div class="lb-title" id="lb-title"></div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <button class="btn" id="lb-zoom-btn" onclick="toggleZoom()">Zoom 100%</button>
+      <button class="btn" onclick="closeLightbox()">✕ Close</button>
+    </div>
+  </div>
+  <div class="lb-stage" id="lb-stage">
+    <button class="lb-nav lb-prev" onclick="stepLightbox(-1)" aria-label="Previous">‹</button>
+    <img class="lb-img" id="lb-img" src="" alt="" onclick="toggleZoom()">
+    <button class="lb-nav lb-next" onclick="stepLightbox(1)" aria-label="Next">›</button>
+  </div>
+  <div class="lb-bar">
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+      <button class="vbtn" id="lb-fav-btn" onclick="toggleVoteCurrent('fav')">❤️ Top Pick</button>
+      <button class="vbtn" id="lb-like-btn" onclick="toggleVoteCurrent('like')">👍 Like</button>
+      <div class="col-picks" id="lb-colors" title="Preferred hoodie color"></div>
+    </div>
+    <input class="note-input lb-note" id="lb-note" type="text" placeholder="Add a quick note about this draft..." oninput="updateNoteCurrent(this.value)">
+    <div style="font-size:12px;color:var(--muted)" id="lb-pos"></div>
+  </div>
+</div>
+
+<!-- Share Picks Modal -->
+<div class="modal-bg" id="share-modal" onclick="if(event.target===this)closeShareModal()">
+  <div class="modal">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+      <h3>Send Your Feedback</h3>
+      <button class="btn" onclick="closeShareModal()">✕</button>
+    </div>
+    <p class="m-sub">Copy the formatted shortlist below and paste it straight into WhatsApp, Messenger, or Telegram — or send directly via WhatsApp.</p>
+
+    <label class="m-label" for="reviewer-name">Your Name (optional)</label>
+    <input class="note-input" id="reviewer-name" type="text" placeholder="e.g. Alex" oninput="refreshSummary()">
+
+    <label class="m-label" for="summary-text">Your Shortlist Summary</label>
+    <textarea class="summary-box" id="summary-text" readonly></textarea>
+
+    <div class="modal-actions">
+      <button class="btn btn-accent" id="btn-copy-summary" onclick="copySummary()">📋 Copy Summary</button>
+      <button class="btn" onclick="shareWhatsApp()">💬 Send via WhatsApp</button>
+      <button class="btn" id="btn-copy-link" onclick="copyPicksLink()">🔗 Copy Link With My Picks</button>
+      <button class="btn" style="margin-left:auto;color:#ff9c9c;" onclick="resetAllVotes()">Reset</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const SERIES = [{"key": "J", "label": "Series J · Woodblock Fireworks", "short": "J · Fireworks", "badge": "NEWEST", "desc": "Evolved 2-color Dusk Woodblock with twin pines, pure backlit NYE toast silhouettes around both benches, and the sun swapped for 3 Japanese woodblock firework treatments (2-screen printable).", "items": [{"num": 1, "code": "J-01", "series": "J", "seriesLabel": "Series J · Woodblock Fireworks", "title": "Kiku Hanabi · Midnight Toast", "sub": "Single grand carved chrysanthemum burst · 11 silhouettes · twin pines", "full": "boards/01_j-01_board_woodblock_hanabi_01_kiku.jpg", "thumb": "thumbs/01_j-01_board_woodblock_hanabi_01_kiku.jpg"}, {"num": 2, "code": "J-02", "series": "J", "seriesLabel": "Series J · Woodblock Fireworks", "title": "Midnight Willows · Iskar Horizon", "sub": "3 staggered weeping-willow bursts · asymmetric Iskar ridge · 9 silhouettes", "full": "boards/02_j-02_board_woodblock_hanabi_02_willow.jpg", "thumb": "thumbs/02_j-02_board_woodblock_hanabi_02_willow.jpg"}, {"num": 3, "code": "J-03", "series": "J", "seriesLabel": "Series J · Woodblock Fireworks", "title": "Stippled Hanabi · Full Crew", "sub": "3 concentric carved-dot blooms · 15 silhouettes · glowing lake band", "full": "boards/03_j-03_board_woodblock_hanabi_03_stipple.jpg", "thumb": "thumbs/03_j-03_board_woodblock_hanabi_03_stipple.jpg"}]}, {"key": "I", "label": "Series I · Woodblock NYE Celebration", "short": "I · Woodblock NYE", "badge": "FAVORITE", "desc": "Dusk Woodblock evolved with branches removed, centered terracotta sun & shimmer reflection, twin framing pines, and pure backlit silhouettes raising glasses in a NYE toast.", "items": [{"num": 4, "code": "I-01", "series": "I", "seriesLabel": "Series I · Woodblock NYE Celebration", "title": "The Midnight Toast", "sub": "11 pure backlit silhouettes · twin symmetrical pines · center clink sparks", "full": "boards/04_i-01_board_woodblock_nye_01_toast.jpg", "thumb": "thumbs/04_i-01_board_woodblock_nye_01_toast.jpg"}, {"num": 5, "code": "I-02", "series": "I", "seriesLabel": "Series I · Woodblock NYE Celebration", "title": "Starlight Cheers · Full Crew", "sub": "15 silhouettes · glowing full-width lake · drifting terracotta sparkles", "full": "boards/05_i-02_board_woodblock_nye_02_starlight.jpg", "thumb": "thumbs/05_i-02_board_woodblock_nye_02_starlight.jpg"}, {"num": 6, "code": "I-03", "series": "I", "seriesLabel": "Series I · Woodblock NYE Celebration", "title": "Iskar Horizon · Organic Pines", "sub": "9 airy silhouettes · exact asymmetric Lake Iskar ridge · widening shimmer", "full": "boards/06_i-03_board_woodblock_nye_03_horizon.jpg", "thumb": "thumbs/06_i-03_board_woodblock_nye_03_horizon.jpg"}]}, {"key": "H", "label": "Series H · The Lakeside Benches", "short": "H · Benches", "badge": "", "desc": "Four minimalist interpretations built directly around the sunset photograph of the two wooden benches, stump table & Lake Iskar view at Club Paradise Bay.", "items": [{"num": 7, "code": "H-01", "series": "H", "seriesLabel": "Series H · The Lakeside Benches", "title": "Golden Hour · Risograph Plate", "sub": "Solstice Chorus Japanese watercolor style + 3 subtle translucent blooms", "full": "boards/07_h-01_board_bench_01_riso.jpg", "thumb": "thumbs/07_h-01_board_bench_01_riso.jpg"}, {"num": 8, "code": "H-02", "series": "H", "seriesLabel": "Series H · The Lakeside Benches", "title": "The Quiet Seat · Chevron Hybrid", "sub": "Draft 01 fine-line double-V chevron fused with twilight watercolor blooms", "full": "boards/08_h-02_board_bench_02_chevron.jpg", "thumb": "thumbs/08_h-02_board_bench_02_chevron.jpg"}, {"num": 9, "code": "H-03", "series": "H", "seriesLabel": "Series H · The Lakeside Benches", "title": "Two Benches · Organic Contour", "sub": "Whisper-thin continuous monoline + off-register clay, sage & sea-jade gouache", "full": "boards/09_h-03_board_bench_03_contour.jpg", "thumb": "thumbs/09_h-03_board_bench_03_contour.jpg"}, {"num": 10, "code": "H-04", "series": "H", "seriesLabel": "Series H · The Lakeside Benches", "title": "Dusk Woodblock (Original Scene)", "sub": "Borderless 2-color Japanese–Nordic linocut of the quiet sunset benches", "full": "boards/10_h-04_board_bench_04_woodblock.jpg", "thumb": "thumbs/10_h-04_board_bench_04_woodblock.jpg"}]}, {"key": "G", "label": "Series G · Organic Contours", "short": "G · Contours", "badge": "", "desc": "Airy continuous monoline contour lines paired with muted flat clay-terracotta, sand, sage & sea-jade gouache washes floating borderlessly on fabric.", "items": [{"num": 11, "code": "G-01", "series": "G", "seriesLabel": "Series G · Organic Contours", "title": "Winding Peninsula", "sub": "Continuous-line Lake Iskar contours, clay bank, fine-line pines & hollow moon", "full": "boards/11_g-01_board_contour_01_peninsula.jpg", "thumb": "thumbs/11_g-01_board_contour_01_peninsula.jpg"}, {"num": 12, "code": "G-02", "series": "G", "seriesLabel": "Series G · Organic Contours", "title": "Hanabi Contour Drift", "sub": "Organic continuous-line contours fused with translucent Solstice blooms", "full": "boards/12_g-02_board_contour_02_hanabi.jpg", "thumb": "thumbs/12_g-02_board_contour_02_hanabi.jpg"}, {"num": 13, "code": "G-03", "series": "G", "seriesLabel": "Series G · Organic Contours", "title": "Sanctuary Line", "sub": "Minimalist single-line Y-brace cabin roofline beside sea-jade bay", "full": "boards/13_g-03_board_contour_03_sanctuary.jpg", "thumb": "thumbs/13_g-03_board_contour_03_sanctuary.jpg"}, {"num": 14, "code": "G-04", "series": "G", "seriesLabel": "Series G · Organic Contours", "title": "Original Iskar Drift", "sub": "100% from-scratch asymmetrical S-curve bay, 3 tall pines & moon ring", "full": "boards/14_g-04_board_contour_04_original.jpg", "thumb": "thumbs/14_g-04_board_contour_04_original.jpg"}]}, {"key": "F", "label": "Series F · Solstice & Chevron Hybrids", "short": "F · Solstice × V", "badge": "", "desc": "Pure variations of Solstice Chorus's ethereal Japanese watercolor hanabi blooms & calm emerald lake, plus 3 hybrids fused with Draft 01's fine-line ink chevron.", "items": [{"num": 15, "code": "F-01", "series": "F", "seriesLabel": "Series F · Solstice & Chevron Hybrids", "title": "Solstice Pure", "sub": "Unobstructed translucent hanabi blooms & emerald lake reflection", "full": "boards/15_f-01_board_solstice_01_pure.jpg", "thumb": "thumbs/15_f-01_board_solstice_01_pure.jpg"}, {"num": 16, "code": "F-02", "series": "F", "seriesLabel": "Series F · Solstice & Chevron Hybrids", "title": "Nocturne Pine Mist", "sub": "3-panel gallery triptych split · ghostly midnight Lake Iskar pines", "full": "boards/16_f-02_board_solstice_02_nocturne.jpg", "thumb": "thumbs/16_f-02_board_solstice_02_nocturne.jpg"}, {"num": 17, "code": "F-03", "series": "F", "seriesLabel": "Series F · Solstice & Chevron Hybrids", "title": "Five Blooms Arch", "sub": "Airy Scandinavian minimalism · arched twilight horizon portal", "full": "boards/17_f-03_board_solstice_03_arch.jpg", "thumb": "thumbs/17_f-03_board_solstice_03_arch.jpg"}, {"num": 18, "code": "F-04", "series": "F", "seriesLabel": "Series F · Solstice & Chevron Hybrids", "title": "Prism Hanabi", "sub": "Exact Solstice blooms & lake clipped inside stepped double-V chevron", "full": "boards/18_f-04_board_solstice_04_prism.jpg", "thumb": "thumbs/18_f-04_board_solstice_04_prism.jpg"}, {"num": 19, "code": "F-05", "series": "F", "seriesLabel": "Series F · Solstice & Chevron Hybrids", "title": "Diamond Cove × Solstice", "sub": "Mixed-media fine-line stippled pines, ink ridge & translucent blooms", "full": "boards/19_f-05_board_solstice_05_mist_chevron.jpg", "thumb": "thumbs/19_f-05_board_solstice_05_mist_chevron.jpg"}, {"num": 20, "code": "F-06", "series": "F", "seriesLabel": "Series F · Solstice & Chevron Hybrids", "title": "Open Blooms · Inverted Cove", "sub": "Deconstructed airy open chevron with free-floating watercolor blooms", "full": "boards/20_f-06_board_solstice_06_open_blooms.jpg", "thumb": "thumbs/20_f-06_board_solstice_06_open_blooms.jpg"}]}, {"key": "E", "label": "Series E · Ultra-Abstract 20 Crew", "short": "E · Abstract 20", "badge": "", "desc": "Three radical, poetic abstractions representing a 20-friend (10+10) gathering without literal human silhouettes or spiky fireworks.", "items": [{"num": 21, "code": "E-01", "series": "E", "seriesLabel": "Series E · Ultra-Abstract 20 Crew", "title": "Twenty Monoliths", "sub": "Bauhaus totems × Swiss op-art stipple midnight light-field", "full": "boards/21_e-01_board_abs20_01_monoliths.jpg", "thumb": "thumbs/21_e-01_board_abs20_01_monoliths.jpg"}, {"num": 22, "code": "E-02", "series": "E", "seriesLabel": "Series E · Ultra-Abstract 20 Crew", "title": "Convergence 10+10", "sub": "Peninsula gathering arc × James Turrell midnight mist blooms", "full": "boards/22_e-02_board_abs20_02_convergence.jpg", "thumb": "thumbs/22_e-02_board_abs20_02_convergence.jpg"}, {"num": 23, "code": "E-03", "series": "E", "seriesLabel": "Series E · Ultra-Abstract 20 Crew", "title": "Solstice Chorus", "sub": "20 sculptural forms × 35mm Japanese watercolor hanabi pigment fog", "full": "boards/23_e-03_board_abs20_03_chorus.jpg", "thumb": "thumbs/23_e-03_board_abs20_03_chorus.jpg"}]}, {"key": "D", "label": "Series D · Geometric Crew 20", "short": "D · Crew 20", "badge": "", "desc": "Minimalist pure-vector geometric designs built around an exact 20-person (10 boys / 10 girls) silhouette lineup watching midnight fireworks over Lake Iskar.", "items": [{"num": 24, "code": "D-01", "series": "D", "seriesLabel": "Series D · Geometric Crew 20", "title": "00:00 on the Pier", "sub": "Swiss architectural elevation along the wooden pontoon pier", "full": "boards/24_d-01_board_crew20_01_pier.jpg", "thumb": "thumbs/24_d-01_board_crew20_01_pier.jpg"}, {"num": 25, "code": "D-02", "series": "D", "seriesLabel": "Series D · Geometric Crew 20", "title": "The Diamond Horizon", "sub": "20-friend lineup framed inside a faceted diamond vessel", "full": "boards/25_d-02_board_crew20_02_diamond.jpg", "thumb": "thumbs/25_d-02_board_crew20_02_diamond.jpg"}, {"num": 26, "code": "D-03", "series": "D", "seriesLabel": "Series D · Geometric Crew 20", "title": "Midnight Medallion", "sub": "Mid-century circular lakeside horizon emblem", "full": "boards/26_d-03_board_crew20_03_medallion.jpg", "thumb": "thumbs/26_d-03_board_crew20_03_medallion.jpg"}, {"num": 27, "code": "D-04", "series": "D", "seriesLabel": "Series D · Geometric Crew 20", "title": "Bauhaus Solstice", "sub": "Japanese–Bauhaus geometric midnight poster", "full": "boards/27_d-04_board_crew20_04_bauhaus.jpg", "thumb": "thumbs/27_d-04_board_crew20_04_bauhaus.jpg"}]}, {"key": "C", "label": "Series C · Atelier Originals", "short": "C · Atelier", "badge": "", "desc": "Three deeply original luxury-atelier directions designed from first principles around the Hague-to-Lake-Iskar narrative (0m → 850m).", "items": [{"num": 28, "code": "C-01", "series": "C", "seriesLabel": "Series C · Atelier Originals", "title": "Meridian 0→850", "sub": "Dutch hydrographic cartography × architectural elevation (Den Haag → Iskar)", "full": "boards/28_c-01_board_atelier_01_meridian.jpg", "thumb": "thumbs/28_c-01_board_atelier_01_meridian.jpg"}, {"num": 29, "code": "C-02", "series": "C", "seriesLabel": "Series C · Atelier Originals", "title": "Inverted Midnight", "sub": "Borderless 2-color Japanese–Nordic woodblock printmaking", "full": "boards/29_c-02_board_atelier_02_midnight.jpg", "thumb": "thumbs/29_c-02_board_atelier_02_midnight.jpg"}, {"num": 30, "code": "C-03", "series": "C", "seriesLabel": "Series C · Atelier Originals", "title": "The Glass Pavilion", "sub": "Brand-owned THC_square isometric portal × Swiss brutalist identity", "full": "boards/30_c-03_board_atelier_03_pavilion.jpg", "thumb": "thumbs/30_c-03_board_atelier_03_pavilion.jpg"}]}, {"key": "B", "label": "Series B · Abstract Studies", "short": "B · Abstract", "badge": "", "desc": "Six modernist abstract reinterpretations expanding the initial reference directions into topographic, Bauhaus, and color-field territory.", "items": [{"num": 31, "code": "B-01", "series": "B", "seriesLabel": "Series B · Abstract Studies", "title": "Topographic Echo", "sub": "Kinetic fine-line contour & wireframe elevation", "full": "boards/31_b-01_board_abstract_01.jpg", "thumb": "thumbs/31_b-01_board_abstract_01.jpg"}, {"num": 32, "code": "B-02", "series": "B", "seriesLabel": "Series B · Abstract Studies", "title": "Isometric Monolith", "sub": "Architectural terrain sculpture of the peninsula", "full": "boards/32_b-02_board_abstract_02.jpg", "thumb": "thumbs/32_b-02_board_abstract_02.jpg"}, {"num": 33, "code": "B-03", "series": "B", "seriesLabel": "Series B · Abstract Studies", "title": "Waterline Study I–III", "sub": "Atmospheric Nordic color-field triptych", "full": "boards/33_b-03_board_abstract_03.jpg", "thumb": "thumbs/33_b-03_board_abstract_03.jpg"}, {"num": 34, "code": "B-04", "series": "B", "seriesLabel": "Series B · Abstract Studies", "title": "Bauhaus Bay", "sub": "Constructivist risograph editorial poster", "full": "boards/34_b-04_board_abstract_04.jpg", "thumb": "thumbs/34_b-04_board_abstract_04.jpg"}, {"num": 35, "code": "B-05", "series": "B", "seriesLabel": "Series B · Abstract Studies", "title": "Solstice Fragments", "sub": "Modernist paper-cut geometric equilibrium", "full": "boards/35_b-05_board_abstract_05.jpg", "thumb": "thumbs/35_b-05_board_abstract_05.jpg"}, {"num": 36, "code": "B-06", "series": "B", "seriesLabel": "Series B · Abstract Studies", "title": "Faceted Horizon", "sub": "Constructivist monoline prism crest", "full": "boards/36_b-06_board_abstract_06.jpg", "thumb": "thumbs/36_b-06_board_abstract_06.jpg"}]}, {"key": "A", "label": "Series A · First Explorations", "short": "A · First Drafts", "badge": "", "desc": "The original six graphic explorations mapping the initial style references to Club Paradise Bay on Lake Iskar.", "items": [{"num": 37, "code": "A-01", "series": "A", "seriesLabel": "Series A · First Explorations", "title": "The Diamond Cove", "sub": "Fine-line ink inverted-V chevron (original Draft 01)", "full": "boards/37_a-01_board_draft_01.jpg", "thumb": "thumbs/37_a-01_board_draft_01.jpg"}, {"num": 38, "code": "A-02", "series": "A", "seriesLabel": "Series A · First Explorations", "title": "Isometric Paradise Island", "sub": "3D miniature peninsula terrain diorama", "full": "boards/38_a-02_board_draft_02.jpg", "thumb": "thumbs/38_a-02_board_draft_02.jpg"}, {"num": 39, "code": "A-03", "series": "A", "seriesLabel": "Series A · First Explorations", "title": "Iskar Reflections", "sub": "Misty Nordic watercolor 3-panel triptych", "full": "boards/39_a-03_board_draft_03.jpg", "thumb": "thumbs/39_a-03_board_draft_03.jpg"}, {"num": 40, "code": "A-04", "series": "A", "seriesLabel": "Series A · First Explorations", "title": "Midnight Sun Over the Bay", "sub": "Editorial risograph sunrise/midnight poster", "full": "boards/40_a-04_board_draft_04.jpg", "thumb": "thumbs/40_a-04_board_draft_04.jpg"}, {"num": 41, "code": "A-05", "series": "A", "seriesLabel": "Series A · First Explorations", "title": "Peninsula Cutout", "sub": "Scandinavian layered paper-cut collage", "full": "boards/41_a-05_board_draft_05.jpg", "thumb": "thumbs/41_a-05_board_draft_05.jpg"}, {"num": 42, "code": "A-06", "series": "A", "seriesLabel": "Series A · First Explorations", "title": "Bay Crest 26/27", "sub": "Stained-glass monoline circular badge", "full": "boards/42_a-06_board_draft_06.jpg", "thumb": "thumbs/42_a-06_board_draft_06.jpg"}]}];
+const ALL_ITEMS = SERIES.flatMap(s => s.items);
+const ITEM_BY_CODE = Object.fromEntries(ALL_ITEMS.map(x => [x.code, x]));
+const COLOR_OPTIONS = [
+  { key: "green", label: "59 Dark Green", hex: "#2E362F" },
+  { key: "beige", label: "31 Beige", hex: "#DCD6CA" },
+  { key: "black", label: "09 Black", hex: "#151618" },
+];
+const STORAGE_KEY = "thc_nye_26_27_review_v1";
+
+let activeTab = "ALL";
+let lbList = ALL_ITEMS;
+let lbIndex = 0;
+let state = { name: "", votes: {} }; // votes[code] = { status: "fav"|"like"|"", color: "", note: "" }
+
+function loadState() {
+  // Check if URL has ?picks= encoded feedback from a friend
+  const params = new URLSearchParams(window.location.search);
+  const picksParam = params.get("picks");
+  if (picksParam) {
+    try {
+      const decoded = JSON.parse(decodeURIComponent(escape(atob(picksParam))));
+      if (decoded && decoded.votes) {
+        state = { name: decoded.name || "", votes: decoded.votes };
+        const who = state.name ? `${state.name}'s` : "Shared";
+        document.getElementById("shared-banner-text").innerHTML = `<strong>Viewing ${who} Picks</strong> — switch to the <strong>★ Shortlist</strong> tab to see their favorites side-by-side.`;
+        document.getElementById("shared-banner").classList.add("show");
+        activeTab = "SHORTLIST";
+        return;
+      }
+    } catch (e) {}
+  }
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) state = JSON.parse(raw);
+    if (!state.votes) state.votes = {};
+  } catch (e) {}
+}
+
+function saveState() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  updateCounts();
+}
+
+function clearSharedLink() {
+  window.history.replaceState({}, "", window.location.pathname);
+  document.getElementById("shared-banner").classList.remove("show");
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    state = raw ? JSON.parse(raw) : { name: "", votes: {} };
+  } catch (e) {
+    state = { name: "", votes: {} };
+  }
+  activeTab = "ALL";
+  renderTabs();
+  renderGallery();
+  updateCounts();
+}
+
+function getVote(code) {
+  return state.votes[code] || { status: "", color: "", note: "" };
+}
+
+function setVoteField(code, patch) {
+  const cur = getVote(code);
+  const next = { ...cur, ...patch };
+  if (!next.status && !next.color && !next.note) {
+    delete state.votes[code];
+  } else {
+    state.votes[code] = next;
+  }
+  saveState();
+}
+
+function getCounts() {
+  let fav = 0, like = 0;
+  Object.values(state.votes).forEach(v => {
+    if (v.status === "fav") fav++;
+    else if (v.status === "like") like++;
+  });
+  return { fav, like, total: fav + like };
+}
+
+function updateCounts() {
+  const c = getCounts();
+  document.getElementById("top-count").textContent = c.total;
+  document.getElementById("dock-stats").innerHTML = `<strong>${c.fav}</strong> Top Pick${c.fav===1?'':'s'} · <strong>${c.like}</strong> Like${c.like===1?'':'s'}`;
+  const st = document.querySelector(".shortlist-tab");
+  if (st) {
+    st.textContent = `★ Shortlist (${c.total})`;
+    st.classList.toggle("has-picks", c.total > 0);
+  }
+}
+
+function setTab(key) {
+  activeTab = key;
+  renderTabs();
+  renderGallery();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderTabs() {
+  const c = getCounts();
+  const tabs = [
+    `<button class="tab ${activeTab==='ALL'?'active':''}" onclick="setTab('ALL')">All (42)</button>`,
+    `<button class="tab shortlist-tab ${c.total>0?'has-picks':''} ${activeTab==='SHORTLIST'?'active':''}" onclick="setTab('SHORTLIST')">★ Shortlist (${c.total})</button>`,
+    ...SERIES.map(s => `<button class="tab ${activeTab===s.key?'active':''}" onclick="setTab('${s.key}')">${s.badge==='NEWEST'?'<span class="dot-new"></span>':''}${s.short} (${s.items.length})</button>`)
+  ];
+  document.getElementById("tabs-bar").innerHTML = tabs.join("");
+}
+
+function renderCard(item) {
+  const v = getVote(item.code);
+  const cardCls = v.status === "fav" ? "card is-fav" : v.status === "like" ? "card is-like" : "card";
+  const colorDots = COLOR_OPTIONS.map(col => `
+    <button class="cp-dot ${v.color===col.key?'active':''}" style="background:${col.hex}"
+      title="Prefer ${col.label}" onclick="toggleColor('${item.code}','${col.key}')"></button>`).join("");
+
+  return `
+  <article class="${cardCls}" id="card-${item.code}">
+    <button class="thumb-btn" onclick="openLightbox('${item.code}')" aria-label="Zoom ${item.title}">
+      <img src="${item.thumb}" loading="lazy" alt="${item.code} — ${item.title}">
+      <span class="zoom-hint">⤢ Zoom</span>
+    </button>
+    <div class="card-body">
+      <div>
+        <h3 class="card-title"><span class="code-tag">${item.code}</span>${item.title}</h3>
+        <p class="card-sub">${item.sub}</p>
+      </div>
+      <div>
+        <div class="vote-row">
+          <div class="vote-btns">
+            <button class="vbtn ${v.status==='fav'?'fav-active':''}" onclick="toggleVote('${item.code}','fav')">❤️ Top</button>
+            <button class="vbtn ${v.status==='like'?'like-active':''}" onclick="toggleVote('${item.code}','like')">👍 Like</button>
+            <button class="vbtn ${v.note?'note-has':''}" onclick="toggleNoteBox('${item.code}')" title="Add note">💬${v.note?' 1':''}</button>
+          </div>
+          <div class="col-picks" title="Optional: pick favorite hoodie color">${colorDots}</div>
+        </div>
+        <div class="note-box-inline ${v.note?'open':''}" id="note-wrap-${item.code}">
+          <input class="note-input" type="text" value="${(v.note||'').replace(/"/g,'&quot;')}"
+            placeholder="Quick note (e.g. swap logo, love on dark green)..."
+            oninput="updateNote('${item.code}', this.value)">
+        </div>
+      </div>
+    </div>
+  </article>`;
+}
+
+function renderGallery() {
+  const root = document.getElementById("gallery-root");
+  if (activeTab === "SHORTLIST") {
+    const favs = ALL_ITEMS.filter(x => getVote(x.code).status === "fav");
+    const likes = ALL_ITEMS.filter(x => getVote(x.code).status === "like");
+    const noted = ALL_ITEMS.filter(x => !getVote(x.code).status && getVote(x.code).note);
+    if (!favs.length && !likes.length && !noted.length) {
+      root.innerHTML = `<div class="empty-state"><h3>Your shortlist is empty</h3><p>Tap <strong>❤️ Top</strong> or <strong>👍 Like</strong> on any drafts you want to compare side-by-side here.</p><button class="btn btn-accent" onclick="setTab('ALL')">Browse All 42 Drafts</button></div>`;
+      return;
+    }
+    let html = "";
+    if (favs.length) {
+      html += `<section class="series-block"><div class="series-head"><div><div class="series-title-row"><h2>❤️ Top Picks</h2><span class="badge">${favs.length} SELECTED</span></div></div></div><div class="cards-grid">${favs.map(renderCard).join("")}</div></section>`;
+    }
+    if (likes.length) {
+      html += `<section class="series-block"><div class="series-head"><div><div class="series-title-row"><h2>👍 Likes</h2></div></div><span class="series-count">${likes.length} drafts</span></div><div class="cards-grid">${likes.map(renderCard).join("")}</div></section>`;
+    }
+    if (noted.length) {
+      html += `<section class="series-block"><div class="series-head"><div><div class="series-title-row"><h2>💬 Noted Drafts</h2></div></div></div><div class="cards-grid">${noted.map(renderCard).join("")}</div></section>`;
+    }
+    root.innerHTML = html;
+    return;
+  }
+
+  const groups = activeTab === "ALL" ? SERIES : SERIES.filter(s => s.key === activeTab);
+  root.innerHTML = groups.map(s => `
+    <section class="series-block" id="series-${s.key}">
+      <div class="series-head">
+        <div>
+          <div class="series-title-row">
+            <h2>${s.label}</h2>
+            ${s.badge ? `<span class="badge">${s.badge}</span>` : ""}
+          </div>
+          <p class="series-desc">${s.desc}</p>
+        </div>
+        <span class="series-count">${s.items.length} drafts</span>
+      </div>
+      <div class="cards-grid">${s.items.map(renderCard).join("")}</div>
+    </section>
+  `).join("");
+}
+
+function toggleVote(code, kind) {
+  const cur = getVote(code);
+  setVoteField(code, { status: cur.status === kind ? "" : kind });
+  refreshCardUI(code);
+}
+
+function toggleColor(code, colKey) {
+  const cur = getVote(code);
+  setVoteField(code, { color: cur.color === colKey ? "" : colKey });
+  refreshCardUI(code);
+}
+
+function toggleNoteBox(code) {
+  const el = document.getElementById(`note-wrap-${code}`);
+  if (!el) return;
+  el.classList.toggle("open");
+  if (el.classList.contains("open")) {
+    const inp = el.querySelector("input");
+    if (inp) inp.focus();
+  }
+}
+
+function updateNote(code, val) {
+  setVoteField(code, { note: val.trim() });
+}
+
+function refreshCardUI(code) {
+  if (activeTab === "SHORTLIST") {
+    renderGallery();
+    return;
+  }
+  const el = document.getElementById(`card-${code}`);
+  if (el && ITEM_BY_CODE[code]) {
+    const tmp = document.createElement("div");
+    tmp.innerHTML = renderCard(ITEM_BY_CODE[code]).trim();
+    el.replaceWith(tmp.firstChild);
+  }
+}
+
+/* Lightbox Controls */
+function getVisibleList() {
+  if (activeTab === "ALL") return ALL_ITEMS;
+  if (activeTab === "SHORTLIST") {
+    return [
+      ...ALL_ITEMS.filter(x => getVote(x.code).status === "fav"),
+      ...ALL_ITEMS.filter(x => getVote(x.code).status === "like"),
+      ...ALL_ITEMS.filter(x => !getVote(x.code).status && getVote(x.code).note),
+    ];
+  }
+  const s = SERIES.find(x => x.key === activeTab);
+  return s ? s.items : ALL_ITEMS;
+}
+
+function openLightbox(code) {
+  lbList = getVisibleList();
+  lbIndex = Math.max(0, lbList.findIndex(x => x.code === code));
+  document.getElementById("lightbox").classList.add("open");
+  document.body.style.overflow = "hidden";
+  renderLightbox();
+}
+
+function closeLightbox() {
+  document.getElementById("lightbox").classList.remove("open");
+  document.getElementById("lb-img").classList.remove("zoomed");
+  document.body.style.overflow = "";
+}
+
+function stepLightbox(dir) {
+  lbIndex = (lbIndex + dir + lbList.length) % lbList.length;
+  document.getElementById("lb-img").classList.remove("zoomed");
+  renderLightbox();
+}
+
+function toggleZoom() {
+  const img = document.getElementById("lb-img");
+  img.classList.toggle("zoomed");
+  document.getElementById("lb-zoom-btn").textContent = img.classList.contains("zoomed") ? "Fit Screen" : "Zoom 100%";
+}
+
+function renderLightbox() {
+  const item = lbList[lbIndex];
+  const v = getVote(item.code);
+  document.getElementById("lb-kicker").textContent = `${item.code} · ${item.seriesLabel}`;
+  document.getElementById("lb-title").textContent = `${item.title} — ${item.sub}`;
+  const img = document.getElementById("lb-img");
+  img.src = item.full;
+  img.alt = item.title;
+  document.getElementById("lb-zoom-btn").textContent = "Zoom 100%";
+  document.getElementById("lb-pos").textContent = `${lbIndex + 1} / ${lbList.length}`;
+  document.getElementById("lb-fav-btn").className = `vbtn ${v.status==='fav'?'fav-active':''}`;
+  document.getElementById("lb-like-btn").className = `vbtn ${v.status==='like'?'like-active':''}`;
+  document.getElementById("lb-note").value = v.note || "";
+  document.getElementById("lb-colors").innerHTML = COLOR_OPTIONS.map(col => `
+    <button class="cp-dot ${v.color===col.key?'active':''}" style="background:${col.hex}"
+      title="Prefer ${col.label}" onclick="toggleColorCurrent('${col.key}')"></button>`).join("");
+}
+
+function toggleVoteCurrent(kind) {
+  const item = lbList[lbIndex];
+  toggleVote(item.code, kind);
+  renderLightbox();
+}
+
+function toggleColorCurrent(colKey) {
+  const item = lbList[lbIndex];
+  toggleColor(item.code, colKey);
+  renderLightbox();
+}
+
+function updateNoteCurrent(val) {
+  const item = lbList[lbIndex];
+  updateNote(item.code, val);
+  const inline = document.querySelector(`#note-wrap-${item.code} input`);
+  if (inline) inline.value = val;
+}
+
+/* Keyboard + Touch Swipe for Lightbox */
+document.addEventListener("keydown", e => {
+  const open = document.getElementById("lightbox").classList.contains("open");
+  if (!open) return;
+  if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+  if (e.key === "Escape") closeLightbox();
+  else if (e.key === "ArrowRight") stepLightbox(1);
+  else if (e.key === "ArrowLeft") stepLightbox(-1);
+});
+
+let touchStartX = 0;
+document.getElementById("lb-stage").addEventListener("touchstart", e => {
+  if (e.touches.length === 1) touchStartX = e.touches[0].clientX;
+}, { passive: true });
+document.getElementById("lb-stage").addEventListener("touchend", e => {
+  if (document.getElementById("lb-img").classList.contains("zoomed")) return;
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(dx) > 55) stepLightbox(dx < 0 ? 1 : -1);
+}, { passive: true });
+
+/* Share Modal */
+function buildSummaryText() {
+  const name = (document.getElementById("reviewer-name").value || "").trim();
+  state.name = name;
+  saveState();
+  const favs = ALL_ITEMS.filter(x => getVote(x.code).status === "fav");
+  const likes = ALL_ITEMS.filter(x => getVote(x.code).status === "like");
+  const noted = ALL_ITEMS.filter(x => !getVote(x.code).status && getVote(x.code).note);
+
+  const fmt = (item) => {
+    const v = getVote(item.code);
+    const colObj = COLOR_OPTIONS.find(c => c.key === v.color);
+    const colStr = colObj ? ` [Color: ${colObj.label}]` : "";
+    const noteStr = v.note ? ` — "${v.note}"` : "";
+    return `• ${item.code} (${item.title})${colStr}${noteStr}`;
+  };
+
+  const lines = [];
+  lines.push(`THC NYE 26–27 Design Review${name ? ` — ${name}` : ""}`);
+  lines.push("");
+  if (favs.length) {
+    lines.push("❤️ TOP PICKS:");
+    favs.forEach(x => lines.push(fmt(x)));
+    lines.push("");
+  }
+  if (likes.length) {
+    lines.push("👍 ALSO LIKED:");
+    likes.forEach(x => lines.push(fmt(x)));
+    lines.push("");
+  }
+  if (noted.length) {
+    lines.push("💬 NOTES:");
+    noted.forEach(x => lines.push(fmt(x)));
+    lines.push("");
+  }
+  if (!favs.length && !likes.length && !noted.length) {
+    lines.push("(No favorites selected yet — tap ❤️ Top or 👍 Like on any design!)");
+  }
+  return lines.join("\n").trim();
+}
+
+function openShareModal() {
+  document.getElementById("reviewer-name").value = state.name || "";
+  refreshSummary();
+  document.getElementById("share-modal").classList.add("open");
+}
+
+function closeShareModal() {
+  document.getElementById("share-modal").classList.remove("open");
+}
+
+function refreshSummary() {
+  document.getElementById("summary-text").value = buildSummaryText();
+}
+
+async function copySummary() {
+  const txt = buildSummaryText();
+  try {
+    await navigator.clipboard.writeText(txt);
+    const b = document.getElementById("btn-copy-summary");
+    b.textContent = "✓ Copied! Paste in Chat";
+    setTimeout(() => b.textContent = "📋 Copy Summary", 2200);
+  } catch (e) {
+    const ta = document.getElementById("summary-text");
+    ta.select();
+    document.execCommand("copy");
+  }
+}
+
+function shareWhatsApp() {
+  const txt = buildSummaryText();
+  window.open("https://wa.me/?text=" + encodeURIComponent(txt), "_blank");
+}
+
+async function copyPicksLink() {
+  const payload = { name: (document.getElementById("reviewer-name").value || "").trim(), votes: state.votes };
+  const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+  const base = window.location.origin === "null" ? window.location.href.split("?")[0] : (window.location.origin + window.location.pathname);
+  const url = `${base}?picks=${encoded}`;
+  try {
+    await navigator.clipboard.writeText(url);
+    const b = document.getElementById("btn-copy-link");
+    b.textContent = "✓ Link Copied!";
+    setTimeout(() => b.textContent = "🔗 Copy Link With My Picks", 2200);
+  } catch (e) {
+    prompt("Copy this link:", url);
+  }
+}
+
+function resetAllVotes() {
+  if (!confirm("Clear all your picks and notes?")) return;
+  state = { name: "", votes: {} };
+  saveState();
+  renderGallery();
+  refreshSummary();
+}
+
+loadState();
+renderTabs();
+renderGallery();
+updateCounts();
+</script>
+</body>
+</html>
